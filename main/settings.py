@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'quiz',
 
     # admin
-     'nested_admin',
+    'nested_admin',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

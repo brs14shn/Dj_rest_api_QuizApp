@@ -18,11 +18,16 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural = 'Categories'
 
+    # @property
+    # def quiz_count(self):
+    #     return self.quizz.count()  # related name varsa
+        #return self.quiz_set.count() # related name yoksa classname.lower()_set
+
 
 
 class Quiz(UpdateCreateDate):
     title = models.CharField(max_length=50, verbose_name = 'Quiz Title')
-    category = models.ForeignKey(Category, on_delete = models.CASCADE)
+    category = models.ForeignKey(Category, on_delete = models.CASCADE,related_name="quizz")
     #? delete questions when category changes (models.CASCADE) 👆
     
 
@@ -31,7 +36,11 @@ class Quiz(UpdateCreateDate):
 
     class Meta:
         verbose_name_plural = 'Quizzes'
-        
+
+    @property
+    def question_count(self):
+        return self.question_set.count()
+
 
 class Question(UpdateCreateDate):
     SCALE = (
@@ -46,10 +55,11 @@ class Question(UpdateCreateDate):
 
     def __str__(self):
         return self.title
+ 
 
 class Option(UpdateCreateDate):
     option_text = models.CharField(max_length = 200)
-    question = models.ForeignKey(Question, on_delete = models.CASCADE)
+    question = models.ForeignKey(Question, on_delete = models.CASCADE,related_name="options")
     is_right = models.BooleanField(default=False)
     
 
