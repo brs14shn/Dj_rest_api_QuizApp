@@ -46,7 +46,10 @@ INSTALLED_APPS = [
     'dj_rest_auth',
 
     # myapp
-    'quiz'
+    'quiz',
+
+    # admin
+     'nested_admin',
 ]
 
 MIDDLEWARE = [
